@@ -1,28 +1,28 @@
-package kc.ml.seeker.agents;
+package kc.ml.seeker.entities;
+
+import java.awt.*;
 
 import static kc.ml.seeker.main.SeekerPanel.*;
 
-public class Dot {
+public class Dot extends Entity {
 
-    public static int RADIUS = 10;
-
-    private double posX = WIDTH/2;
-    private double posY = HEIGHT-100;
     private double velX = 0;
     private double velY = 0;
     private double accX = 0;
     private double accY = 0;
 
+    private double fitness;
     private boolean moving = true;
     private final Genome genome;
 
-    Dot() {
+    Dot(double posX, double posY) {
+        super(posX, posY);
         genome = new Genome(1000);
     }
 
     public void update() {
 
-        if (!genome.hasNextAcc() || isTouchingWall()) {
+        if (!genome.hasNextAcc() || isTouchingWall() || isTouchingGoal()) {
             moving = false;
         }
 
@@ -33,8 +33,12 @@ public class Dot {
         move();
     }
 
+    private boolean isTouchingGoal() {
+        return isTouching(GOAL);
+    }
+
     private boolean isTouchingWall() {
-        return (posX < 0 || posX > WIDTH-RADIUS) || (posY < 0 || posY > HEIGHT-RADIUS);
+        return (getPosX() < 0 || getPosX() > WIDTH-DIAMETER) || (getPosY() < 0 || getPosY() > HEIGHT-DIAMETER);
     }
 
     private void move() {
@@ -48,20 +52,24 @@ public class Dot {
         velX = clamp(velX, -7, 7);
         velY = clamp(velY, -7, 7);
 
-        posX += velX;
-        posY += velY;
+        changePosX(velX);
+        changePosY(velY);
     }
 
-    public double getPosX() {
-        return posX;
+    public void evaluateFitness() {
+
     }
 
-    public double getPosY() {
-        return posY;
+    boolean isMoving() {
+        return moving;
     }
 
     private double clamp(double num, double min, double max) {
         return Math.max(min, Math.min(max, num));
     }
 
+    @Override
+    protected Color getColor() {
+        return Color.BLACK;
+    }
 }

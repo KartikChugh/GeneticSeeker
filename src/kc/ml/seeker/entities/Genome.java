@@ -1,4 +1,4 @@
-package kc.ml.seeker.agents;
+package kc.ml.seeker.entities;
 
 import java.util.Random;
 
