@@ -23,8 +23,8 @@ public class Dot {
         velX += accX;
         velY += accY;
 
-        clamp(velX, -5, 5);
-        clamp(velY, -5, 5);
+        velX = clamp(velX, -7, 7);
+        velY = clamp(velY, -7, 7);
 
         posX += velX;
         posY += velY;
