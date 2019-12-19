@@ -1,21 +1,43 @@
 package kc.ml.seeker.agents;
 
+import static kc.ml.seeker.main.SeekerPanel.*;
+
 public class Dot {
 
-    private double posX = 450;
-    private double posY = 800;
+    public static int RADIUS = 10;
+
+    private double posX = WIDTH/2;
+    private double posY = HEIGHT-100;
     private double velX = 0;
     private double velY = 0;
     private double accX = 0;
     private double accY = 0;
 
+    private boolean moving = true;
     private final Genome genome;
 
     Dot() {
         genome = new Genome(1000);
     }
 
-    public void move() {
+    public void update() {
+
+        if (!genome.hasNextAcc() || isTouchingWall()) {
+            moving = false;
+        }
+
+        if (!moving) {
+            return;
+        }
+
+        move();
+    }
+
+    private boolean isTouchingWall() {
+        return (posX < 0 || posX > WIDTH-RADIUS) || (posY < 0 || posY > HEIGHT-RADIUS);
+    }
+
+    private void move() {
         final double[] acc = genome.nextAcc();
         accX = acc[0];
         accY = acc[1];

@@ -17,6 +17,10 @@ class Genome {
         }
     }
 
+    boolean hasNextAcc() {
+        return (geneIndex + 1) < directions.length;
+    }
+
     double[] nextAcc() {
         final double[] acc = new double[2];
         acc[0] = Math.cos(directions[geneIndex]);
