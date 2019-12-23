@@ -49,9 +49,6 @@ public class Dot extends Entity implements Cloneable {
 
         if (!genome.hasNextAcc() || isTouchingWall() || isTouchingGoal()) {
             moving = false;
-        }
-
-        if (!moving) {
             return;
         }
 

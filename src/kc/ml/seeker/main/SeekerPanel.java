@@ -31,17 +31,11 @@ public class SeekerPanel extends JPanel {
 
     private void tick(ActionEvent e) {
         if (population.isMoving()) {
-            for (Dot dot : population.getDots()) {
-                dot.update();
-            }
+            population.update();
             repaint();
         } else {
-            for (Dot dot : population.getDots()) {
-                dot.evaluateFitness();
-            }
             population.doNaturalSelection();
             gen++;
-
         }
     }
 
@@ -50,9 +44,7 @@ public class SeekerPanel extends JPanel {
         super.paintComponent(g);
         final Graphics2D g2d = (Graphics2D) g;
 
-        for (Dot dot : population.getDots()) {
-            dot.draw(g2d);
-        }
+        population.draw(g2d);
         GOAL.draw(g2d);
 
         g2d.drawString("Gen: " + gen, 15, 15);

@@ -1,5 +1,6 @@
 package kc.ml.seeker.entities;
 
+import java.awt.*;
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -14,10 +15,6 @@ public class Population {
         }
     }
 
-    public Dot[] getDots() {
-        return dots;
-    }
-
     public boolean isMoving() {
         for (Dot dot : dots) {
             if (dot.isMoving()) {
@@ -27,8 +24,21 @@ public class Population {
         return false;
     }
 
-    public void doNaturalSelection() {
+    public void update() {
+        for (Dot dot : dots) {
+            if (dot.isMoving()) {
+                dot.update();
+            }
+        }
+    }
 
+    private void evaluateFitness() {
+        for (Dot dot : dots) {
+            dot.evaluateFitness();
+        }
+    }
+
+    private void reproduce() {
         final Dot[] descendants = new Dot[dots.length];
         final Dot mostFit = Arrays.stream(dots).max(Comparator.comparingDouble(Dot::getFitness)).get();
         descendants[0] = new Dot(mostFit, 0);
@@ -40,6 +50,17 @@ public class Population {
         }
 
         dots = descendants;
+    }
+
+    public void doNaturalSelection() {
+        evaluateFitness();
+        reproduce();
+    }
+
+    public void draw(Graphics2D g2d) {
+        for (Dot dot : dots) {
+            dot.draw(g2d);
+        }
     }
 
     private Dot selectDot() {
