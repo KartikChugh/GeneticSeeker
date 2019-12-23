@@ -6,6 +6,7 @@ import static kc.ml.seeker.main.SeekerPanel.*;
 
 public class Dot extends Entity implements Cloneable {
 
+    private static final int NUM_GENES = 400;
     private final double posX_start;
     private final double posY_start;
     private double velX;
@@ -27,11 +28,11 @@ public class Dot extends Entity implements Cloneable {
     }
 
     Dot(double posX, double posY) {
-        this(posX, posY, new Genome(400));
+        this(posX, posY, new Genome(NUM_GENES));
     }
 
-    Dot(Dot dot, double mutationChance) {
-        this(dot.posX_start, dot.posY_start, new Genome(dot.genome, mutationChance));
+    Dot cloned(double mutationChance) {
+        return new Dot(this.posX_start, this.posY_start, genome.cloned(mutationChance));
     }
 
     private void initialize() {

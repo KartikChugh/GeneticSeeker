@@ -13,11 +13,11 @@ public abstract class Entity {
         setPosY(posY);
     }
 
-    public final double getPosX() {
+    final double getPosX() {
         return posX;
     }
 
-    public final double getPosY() {
+    final double getPosY() {
         return posY;
     }
 

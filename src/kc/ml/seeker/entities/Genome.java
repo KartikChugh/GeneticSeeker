@@ -7,20 +7,24 @@ class Genome {
 
     private static final Random SEEDER = new Random(13); // TODO remove
     private final double[] directions;
-    private final Random rng;
+    private final Random randomMutator;
     private int geneIndex;
 
     Genome(int size) {
-        rng = new Random(SEEDER.nextInt());
+        randomMutator = new Random(SEEDER.nextInt());
         directions = new double[size];
         randomizeDirections();
     }
 
-    // TODO directions constructor
-    Genome(Genome genome, double mutationChance) {
-        rng = genome.rng;
-        directions = Arrays.copyOf(genome.directions, genome.directions.length);
+    // TODO directions constructor?
+    private Genome(Genome genome, double mutationChance) {
+        randomMutator = genome.randomMutator;
+        directions = genome.directions.clone();
         mutateDirections(mutationChance);
+    }
+
+    Genome cloned(double mutationChance) {
+        return new Genome(this, mutationChance);
     }
 
     private void randomizeDirections() {
@@ -29,8 +33,8 @@ class Genome {
 
     private void mutateDirections(double mutationChance) {
         for (int i = 0; i < directions.length; i++) {
-            if (rng.nextDouble() < mutationChance) {
-                directions[i] = rng.nextDouble() * 360.0;
+            if (randomMutator.nextDouble() < mutationChance) {
+                directions[i] = randomMutator.nextDouble() * 360.0;
             }
         }
     }

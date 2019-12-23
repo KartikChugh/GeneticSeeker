@@ -38,24 +38,26 @@ public class Population {
         }
     }
 
-    private void reproduce() {
+    private void reproduce(double mutationChance) {
         final int populationSize = dots.length;
         final Dot[] descendants = new Dot[populationSize];
         final Dot mostFit = Arrays.stream(dots).max(Comparator.comparingDouble(Dot::getFitness)).get();
-        final Dot mostFitClone = new Dot(mostFit, 0);
+        final Dot mostFitClone = mostFit.cloned(0);
         mostFitClone.setMostFit(true);
         descendants[populationSize-1] = mostFitClone;
 
         for (int i = 0; i < populationSize-1; i++) {
-            descendants[i] = selectDot();
+            final Dot parent = selectParent();
+            final Dot child = parent.cloned(mutationChance);
+            descendants[i] = child;
         }
 
         dots = descendants;
     }
 
-    public void doNaturalSelection() {
+    public void doNaturalSelection(double mutationChance) {
         evaluateFitness();
-        reproduce();
+        reproduce(mutationChance);
     }
 
     public void draw(Graphics2D g2d) {
@@ -64,7 +66,8 @@ public class Population {
         }
     }
 
-    private Dot selectDot() {
+    // TODO optimize fitness proportionate selection
+    private Dot selectParent() {
         final double cumulativeFitness = Arrays.stream(dots).mapToDouble(Dot::getFitness).sum();
         final double threshold = Math.random() * cumulativeFitness;
 
@@ -73,7 +76,7 @@ public class Population {
         for (Dot dot : dots) {
             runningSum += dot.getFitness();
             if (runningSum > threshold) {
-                return new Dot(dot, 0.01);
+                return dot;
             }
         }
 

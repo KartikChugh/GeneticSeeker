@@ -14,6 +14,8 @@ public class SeekerPanel extends JPanel {
     public static final int HEIGHT = 900;
     private static final int TPS_DESIRED = 100;
     public static final Goal GOAL = new Goal(WIDTH/2, 100);
+    private static final double MUTATION_CHANCE = 0.01;
+    private static final int POPULATION_SIZE = 1000;
 
     private int gen = 0;
     private final Timer timer;
@@ -23,7 +25,7 @@ public class SeekerPanel extends JPanel {
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setBackground(Color.WHITE);
 
-        population = new Population(1000, WIDTH/2, HEIGHT-100);
+        population = new Population(POPULATION_SIZE, WIDTH/2, HEIGHT-100);
 
         timer = new Timer(1000/TPS_DESIRED, this::tick);
         timer.start();
@@ -34,7 +36,7 @@ public class SeekerPanel extends JPanel {
             population.update();
             repaint();
         } else {
-            population.doNaturalSelection();
+            population.doNaturalSelection(MUTATION_CHANCE);
             gen++;
         }
     }
