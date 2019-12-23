@@ -1,20 +1,42 @@
 package kc.ml.seeker.entities;
 
+import java.util.Arrays;
 import java.util.Random;
 
 class Genome {
 
+    private static final Random SEEDER = new Random(13); // TODO remove
     private final double[] directions;
     private final Random rng;
     private int geneIndex;
 
     Genome(int size) {
-        rng = new Random();
+        rng = new Random(SEEDER.nextInt());
         directions = new double[size];
+        randomizeDirections();
+    }
 
+    // TODO directions constructor
+    Genome(Genome genome, double mutationChance) {
+        rng = genome.rng;
+        directions = Arrays.copyOf(genome.directions, genome.directions.length);
+        mutateDirections(mutationChance);
+    }
+
+    private void randomizeDirections() {
+        mutateDirections(1.00);
+    }
+
+    private void mutateDirections(double mutationChance) {
         for (int i = 0; i < directions.length; i++) {
-            directions[i] = rng.nextDouble() * 360.0;
+            if (rng.nextDouble() < mutationChance) {
+                directions[i] = rng.nextDouble() * 360.0;
+            }
         }
+    }
+
+    int getGeneIndex() {
+        return geneIndex;
     }
 
     boolean hasNextAcc() {

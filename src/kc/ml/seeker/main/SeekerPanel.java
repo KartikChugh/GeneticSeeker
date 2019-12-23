@@ -12,11 +12,10 @@ public class SeekerPanel extends JPanel {
 
     public static final int WIDTH = 900;
     public static final int HEIGHT = 900;
-    private static final int TPS = 30;
+    private static final int TPS_DESIRED = 100;
     public static final Goal GOAL = new Goal(WIDTH/2, 100);
 
     private int gen = 0;
-    private int tick = 0;
     private final Timer timer;
     private Population population;
 
@@ -24,22 +23,26 @@ public class SeekerPanel extends JPanel {
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setBackground(Color.WHITE);
 
-        population = new Population(100, WIDTH/2, HEIGHT-100);
+        population = new Population(1000, WIDTH/2, HEIGHT-100);
 
-        timer = new Timer(1000/TPS, this::tick);
+        timer = new Timer(1000/TPS_DESIRED, this::tick);
         timer.start();
     }
 
     private void tick(ActionEvent e) {
-        if (!population.isMoving()) {
+        if (population.isMoving()) {
+            for (Dot dot : population.getDots()) {
+                dot.update();
+            }
+            repaint();
+        } else {
+            for (Dot dot : population.getDots()) {
+                dot.evaluateFitness();
+            }
+            population.doNaturalSelection();
             gen++;
-        }
 
-        for (Dot dot : population.getDots()) {
-            dot.update();
         }
-        repaint();
-        tick++;
     }
 
     @Override
@@ -52,6 +55,6 @@ public class SeekerPanel extends JPanel {
         }
         GOAL.draw(g2d);
 
-        //g2d.drawString("Gen: " + gen, 15, 15);
+        g2d.drawString("Gen: " + gen, 15, 15);
     }
 }

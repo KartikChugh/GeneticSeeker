@@ -45,9 +45,13 @@ public abstract class Entity {
         return posY + DIAMETER/2;
     }
 
-    final boolean isTouching(Entity o) {
+    final double squareDistanceFrom(Entity o) {
         // TODO optimize center calculations
-        return Math.pow(getCenterX() - o.getCenterX(), 2) + Math.pow(getCenterY() - o.getCenterY(), 2) <= Math.pow(DIAMETER, 2);
+        return Math.pow(getCenterX() - o.getCenterX(), 2) + Math.pow(getCenterY() - o.getCenterY(), 2);
+    }
+
+    final boolean isTouching(Entity o) {
+        return squareDistanceFrom(o) <= Math.pow(DIAMETER, 2);
     }
 
     public final void draw(Graphics2D g2d) {

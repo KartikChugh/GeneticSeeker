@@ -4,20 +4,45 @@ import java.awt.*;
 
 import static kc.ml.seeker.main.SeekerPanel.*;
 
-public class Dot extends Entity {
+public class Dot extends Entity implements Cloneable {
 
-    private double velX = 0;
-    private double velY = 0;
-    private double accX = 0;
-    private double accY = 0;
+    private final double posX_start;
+    private final double posY_start;
+    private double velX;
+    private double velY;
+    private double accX;
+    private double accY;
 
     private double fitness;
-    private boolean moving = true;
+    private boolean moving;
+    private boolean mostFit;
     private final Genome genome;
 
-    Dot(double posX, double posY) {
+    private Dot(double posX, double posY, Genome genome) {
         super(posX, posY);
-        genome = new Genome(1000);
+        posX_start = posX;
+        posY_start = posY;
+        this.genome = genome;
+        initialize();
+    }
+
+    Dot(double posX, double posY) {
+        this(posX, posY, new Genome(400));
+    }
+
+    Dot(Dot dot, double mutationChance) {
+        this(dot.posX_start, dot.posY_start, new Genome(dot.genome, mutationChance));
+    }
+
+    private void initialize() {
+        setPosX(posX_start);
+        setPosY(posY_start);
+        velX = 0;
+        velY = 0;
+        accX = 0;
+        accY = 0;
+        moving = true;
+        fitness = 0;
     }
 
     public void update() {
@@ -34,6 +59,7 @@ public class Dot extends Entity {
     }
 
     private boolean isTouchingGoal() {
+        //reachedGoal = true;
         return isTouching(GOAL);
     }
 
@@ -57,7 +83,10 @@ public class Dot extends Entity {
     }
 
     public void evaluateFitness() {
+        final double dist = squareDistanceFrom(GOAL);
+        final double cost = dist;
 
+        fitness = 1/cost;
     }
 
     boolean isMoving() {
@@ -70,6 +99,14 @@ public class Dot extends Entity {
 
     @Override
     protected Color getColor() {
-        return Color.BLACK;
+        return mostFit ? Color.GREEN : Color.BLACK;
+    }
+
+    public double getFitness() {
+        return fitness;
+    }
+
+    public void setMostFit(boolean mostFit) {
+        this.mostFit = mostFit;
     }
 }
