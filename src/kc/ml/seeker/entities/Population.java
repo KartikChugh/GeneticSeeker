@@ -39,14 +39,15 @@ public class Population {
     }
 
     private void reproduce() {
-        final Dot[] descendants = new Dot[dots.length];
+        final int populationSize = dots.length;
+        final Dot[] descendants = new Dot[populationSize];
         final Dot mostFit = Arrays.stream(dots).max(Comparator.comparingDouble(Dot::getFitness)).get();
-        descendants[0] = new Dot(mostFit, 0);
-        descendants[0].setMostFit(true);
+        final Dot mostFitClone = new Dot(mostFit, 0);
+        mostFitClone.setMostFit(true);
+        descendants[populationSize-1] = mostFitClone;
 
-        for (int i = 1; i < descendants.length; i++) {
+        for (int i = 0; i < populationSize-1; i++) {
             descendants[i] = selectDot();
-            descendants[i].setMostFit(false);
         }
 
         dots = descendants;
