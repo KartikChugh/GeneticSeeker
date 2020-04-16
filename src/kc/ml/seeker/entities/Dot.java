@@ -94,7 +94,7 @@ public class Dot extends Entity {
     }
 
     private double clamp(double num) {
-        return Math.max(MAX_VELOCITY, Math.min(MAX_VELOCITY, num));
+        return Math.max(-MAX_VELOCITY, Math.min(MAX_VELOCITY, num));
     }
 
     @Override
