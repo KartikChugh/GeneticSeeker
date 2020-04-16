@@ -13,6 +13,8 @@ public abstract class Entity {
         setPosY(posY);
     }
 
+    protected abstract Color getColor();
+
     final double getPosX() {
         return posX;
     }
@@ -38,11 +40,11 @@ public abstract class Entity {
     }
 
     private double getCenterX() {
-        return posX + DIAMETER/2;
+        return posX + DIAMETER/2.0;
     }
 
     private double getCenterY() {
-        return posY + DIAMETER/2;
+        return posY + DIAMETER/2.0;
     }
 
     final double squareDistanceFrom(Entity o) {
@@ -58,7 +60,5 @@ public abstract class Entity {
         g2d.setColor(getColor());
         g2d.fillOval((int) getPosX(), (int) getPosY(), DIAMETER, DIAMETER);
     }
-
-    protected abstract Color getColor();
 
 }

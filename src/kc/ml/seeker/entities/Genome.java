@@ -39,10 +39,6 @@ class Genome {
         }
     }
 
-    int getGeneIndex() {
-        return geneIndex;
-    }
-
     boolean hasNextAcc() {
         return (geneIndex + 1) < directions.length;
     }

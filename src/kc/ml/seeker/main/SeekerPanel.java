@@ -10,24 +10,26 @@ import java.awt.event.ActionEvent;
 
 public class SeekerPanel extends JPanel {
 
-    public static final int WIDTH = 900;
-    public static final int HEIGHT = 900;
-    private static final int TPS_DESIRED = 100;
-    public static final Goal GOAL = new Goal(WIDTH/2, 100);
+    // Evolution Hyperparameters
     private static final double MUTATION_CHANCE = 0.01;
     private static final int POPULATION_SIZE = 1000;
 
+    // Visual Settings
+    public static final int WIDTH = 900;
+    public static final int HEIGHT = 900;
+    private static final int TPS_DESIRED = 100;
+
+    public static final Goal GOAL = new Goal(WIDTH/2.0, 100);
+    private final Population population;
     private int gen = 0;
-    private final Timer timer;
-    private Population population;
 
     SeekerPanel() {
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setBackground(Color.WHITE);
 
-        population = new Population(POPULATION_SIZE, WIDTH/2, HEIGHT-100);
+        population = new Population(POPULATION_SIZE, WIDTH/2.0, HEIGHT-100);
 
-        timer = new Timer(1000/TPS_DESIRED, this::tick);
+        final Timer timer = new Timer(1000/TPS_DESIRED, this::tick);
         timer.start();
     }
 

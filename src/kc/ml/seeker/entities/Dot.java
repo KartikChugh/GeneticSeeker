@@ -4,9 +4,11 @@ import java.awt.*;
 
 import static kc.ml.seeker.main.SeekerPanel.*;
 
-public class Dot extends Entity implements Cloneable {
+public class Dot extends Entity {
 
     private static final int NUM_GENES = 400;
+    private static final double MAX_VELOCITY = 7.0;
+
     private final double posX_start;
     private final double posY_start;
     private double velX;
@@ -73,8 +75,8 @@ public class Dot extends Entity implements Cloneable {
         velX += accX;
         velY += accY;
 
-        velX = clamp(velX, -7, 7);
-        velY = clamp(velY, -7, 7);
+        velX = clamp(velX);
+        velY = clamp(velY);
 
         changePosX(velX);
         changePosY(velY);
@@ -91,8 +93,8 @@ public class Dot extends Entity implements Cloneable {
         return moving;
     }
 
-    private double clamp(double num, double min, double max) {
-        return Math.max(min, Math.min(max, num));
+    private double clamp(double num) {
+        return Math.max(MAX_VELOCITY, Math.min(MAX_VELOCITY, num));
     }
 
     @Override

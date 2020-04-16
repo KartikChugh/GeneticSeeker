@@ -32,6 +32,17 @@ public class Population {
         }
     }
 
+    public void draw(Graphics2D g2d) {
+        for (Dot dot : dots) {
+            dot.draw(g2d);
+        }
+    }
+
+    public void doNaturalSelection(double mutationChance) {
+        evaluateFitness();
+        reproduce(mutationChance);
+    }
+
     private void evaluateFitness() {
         for (Dot dot : dots) {
             dot.evaluateFitness();
@@ -53,17 +64,6 @@ public class Population {
         }
 
         dots = descendants;
-    }
-
-    public void doNaturalSelection(double mutationChance) {
-        evaluateFitness();
-        reproduce(mutationChance);
-    }
-
-    public void draw(Graphics2D g2d) {
-        for (Dot dot : dots) {
-            dot.draw(g2d);
-        }
     }
 
     // TODO optimize fitness proportionate selection
