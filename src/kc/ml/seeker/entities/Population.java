@@ -78,18 +78,29 @@ public class Population implements Drawable {
     private Dot[] reproduce(double mutationChance) {
         final int populationSize = dots.length;
         final Dot[] descendants = new Dot[populationSize];
-        final Dot mostFit = Arrays.stream(dots).max(Comparator.comparingDouble(Dot::getFitness)).get();
-        final Dot mostFitClone = mostFit.cloned(0);
-        mostFitClone.setMostFit(true);
-        descendants[populationSize-1] = mostFitClone;
 
+        includeFittest(descendants);
         for (int i = 0; i < populationSize-1; i++) {
             final Dot parent = selectParent();
             final Dot child = parent.cloned(mutationChance);
             descendants[i] = child;
         }
 
-        dots = descendants;
+        return descendants;
+    }
+
+    /**
+     * Includes fittest dot of existing generation into the next.
+     * @param descendants next generation population
+     */
+    private void includeFittest(Dot[] descendants) {
+        // Thrown if the dots array is empty, causing the max reduction below to fail
+        final Supplier<RuntimeException> emptyPopulation = () -> new IllegalStateException("Population cannot be empty");
+
+        final Dot fittest = Arrays.stream(dots).max(Comparator.comparingDouble(Dot::getFitness)).orElseThrow(emptyPopulation);
+        final Dot fittestClone = fittest.cloned(0); // (perfect) clone to use a new dot instance
+        fittestClone.setMostFit(true);
+        descendants[descendants.length-1] = fittestClone; // drawn last to overlay other dots
     }
 
     // TODO optimize fitness proportionate selection
