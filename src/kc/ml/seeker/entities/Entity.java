@@ -48,8 +48,11 @@ public abstract class Entity implements Drawable {
     }
 
     final double squareDistanceFrom(Entity o) {
-        // TODO optimize center calculations
-        return Math.pow(getCenterX() - o.getCenterX(), 2) + Math.pow(getCenterY() - o.getCenterY(), 2);
+
+        final double dx = getCenterX() - o.getCenterX();
+        final double dy = getCenterY() - o.getCenterY();
+        
+        return dx*dx + dy*dy;
     }
 
     final boolean isTouching(Entity o) {
