@@ -3,11 +3,18 @@ package kc.ml.seeker.entities;
 import java.awt.*;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.function.Supplier;
 
 public class Population implements Drawable {
 
     private Dot[] dots;
 
+    /**
+     * Spawns a population of dots.
+     * @param size number of dots in the population
+     * @param posX starting x position
+     * @param posY starting y position
+     */
     public Population(int size, double posX, double posY) {
         dots = new Dot[size];
         for (int i = 0; i < dots.length; i++) {
@@ -15,6 +22,11 @@ public class Population implements Drawable {
         }
     }
 
+    /**
+     * Returns whether any of the dots is moving.
+     * @return true if any of the dots is moving, false otherwise.
+     * @see Dot#isMoving()
+     */
     public boolean isMoving() {
         for (Dot dot : dots) {
             if (dot.isMoving()) {
@@ -24,6 +36,10 @@ public class Population implements Drawable {
         return false;
     }
 
+    /**
+     * Updates all moving dots.
+     * @see Dot#update()
+     */
     public void update() {
         for (Dot dot : dots) {
             if (dot.isMoving()) {
@@ -39,6 +55,10 @@ public class Population implements Drawable {
         }
     }
 
+    /**
+     * Evaluates fitness of each dot and performs reproduction accordingly.
+     * @param mutationChance chance of a dot's gene mutating
+     */
     public void doNaturalSelection(double mutationChance) {
         evaluateFitness();
         reproduce(mutationChance);
@@ -51,6 +71,10 @@ public class Population implements Drawable {
     }
 
     private void reproduce(double mutationChance) {
+    /**
+     * Produces the next generation of dots from the existing one
+     * @param mutationChance chance of a dot's gene mutating
+     */
         final int populationSize = dots.length;
         final Dot[] descendants = new Dot[populationSize];
         final Dot mostFit = Arrays.stream(dots).max(Comparator.comparingDouble(Dot::getFitness)).get();

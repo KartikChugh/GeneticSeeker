@@ -7,7 +7,6 @@ import java.io.FileNotFoundException;
 public class Seeker {
 
     public static void main(String[] args) throws FileNotFoundException {
-        //System.setOut(new PrintStream(new BufferedOutputStream(new FileOutputStream("output.txt"))));
         SwingUtilities.invokeLater(Seeker::init);
     }
 
@@ -22,12 +21,16 @@ public class Seeker {
 
     }
 
+    /**
+     * Computes dimensions of the panel.
+     * @return length of one side of the square
+     */
     public static int computeSize() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Insets bounds = Toolkit.getDefaultToolkit().getScreenInsets(GraphicsEnvironment
                 .getLocalGraphicsEnvironment().getDefaultScreenDevice()
                 .getDefaultConfiguration());
-        // Heurestic - height minus twice the taskbar size
+        // Heuristic - height minus twice the taskbar size
         final double size = screenSize.getHeight() - 2 * (bounds.top + bounds.bottom);
         return (int) size;
     }
