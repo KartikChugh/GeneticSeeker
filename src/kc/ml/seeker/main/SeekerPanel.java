@@ -1,6 +1,5 @@
 package kc.ml.seeker.main;
 
-import kc.ml.seeker.entities.Dot;
 import kc.ml.seeker.entities.Goal;
 import kc.ml.seeker.entities.Population;
 
@@ -15,22 +14,29 @@ public class SeekerPanel extends JPanel {
     private static final int POPULATION_SIZE = 1000;
 
     // Visual Settings
-    public static final int WIDTH = 900;
-    public static final int HEIGHT = 900;
+    public static int WIDTH;
+    public static int HEIGHT;
     private static final int TPS_DESIRED = 100;
 
-    public static final Goal GOAL = new Goal(WIDTH/2.0, 100);
+    public static Goal goal;
     private final Population population;
     private int gen = 0;
 
-    SeekerPanel() {
-        setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        setBackground(Color.WHITE);
+    SeekerPanel(int size) {
+        initGUI(size);
 
         population = new Population(POPULATION_SIZE, WIDTH/2.0, HEIGHT-100);
+        goal = new Goal(WIDTH/2.0, 100);
 
         final Timer timer = new Timer(1000/TPS_DESIRED, this::tick);
         timer.start();
+    }
+
+    private void initGUI(int size) {
+        HEIGHT = size;
+        WIDTH = size;
+        setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        setBackground(Color.WHITE);
     }
 
     private void tick(ActionEvent e) {
@@ -49,7 +55,7 @@ public class SeekerPanel extends JPanel {
         final Graphics2D g2d = (Graphics2D) g;
 
         population.draw(g2d);
-        GOAL.draw(g2d);
+        goal.draw(g2d);
 
         g2d.drawString("Gen: " + gen, 15, 15);
     }

@@ -1,10 +1,8 @@
 package kc.ml.seeker.main;
 
 import javax.swing.*;
-import java.io.BufferedOutputStream;
+import java.awt.*;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
 
 public class Seeker {
 
@@ -16,12 +14,22 @@ public class Seeker {
     private static void init() {
 
         final JFrame frame = new JFrame("Genetic Seeker");
-        frame.getContentPane().add(new SeekerPanel());
+        frame.getContentPane().add(new SeekerPanel(computeSize()));
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
+    }
+
+    public static int computeSize() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Insets bounds = Toolkit.getDefaultToolkit().getScreenInsets(GraphicsEnvironment
+                .getLocalGraphicsEnvironment().getDefaultScreenDevice()
+                .getDefaultConfiguration());
+        // Heurestic - height minus twice the taskbar size
+        final double size = screenSize.getHeight() - 2 * (bounds.top + bounds.bottom);
+        return (int) size;
     }
 
 }

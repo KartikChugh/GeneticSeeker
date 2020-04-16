@@ -60,7 +60,7 @@ public class Dot extends Entity {
 
     private boolean isTouchingGoal() {
         //reachedGoal = true;
-        return isTouching(GOAL);
+        return isTouching(goal);
     }
 
     private boolean isTouchingWall() {
@@ -83,7 +83,7 @@ public class Dot extends Entity {
     }
 
     public void evaluateFitness() {
-        final double dist = squareDistanceFrom(GOAL);
+        final double dist = squareDistanceFrom(goal);
         final double cost = dist;
 
         fitness = 1/cost;
