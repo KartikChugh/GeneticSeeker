@@ -2,7 +2,7 @@ package kc.ml.seeker.entities;
 
 import java.awt.*;
 
-public abstract class Entity {
+public abstract class Entity implements Drawable {
 
     protected static int DIAMETER = 10;
     private double posX;
@@ -56,6 +56,7 @@ public abstract class Entity {
         return squareDistanceFrom(o) <= Math.pow(DIAMETER, 2);
     }
 
+    @Override
     public final void draw(Graphics2D g2d) {
         g2d.setColor(getColor());
         g2d.fillOval((int) getPosX(), (int) getPosY(), DIAMETER, DIAMETER);

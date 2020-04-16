@@ -4,7 +4,7 @@ import java.awt.*;
 import java.util.Arrays;
 import java.util.Comparator;
 
-public class Population {
+public class Population implements Drawable {
 
     private Dot[] dots;
 
@@ -32,6 +32,7 @@ public class Population {
         }
     }
 
+    @Override
     public void draw(Graphics2D g2d) {
         for (Dot dot : dots) {
             dot.draw(g2d);
