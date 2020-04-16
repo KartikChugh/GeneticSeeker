@@ -61,7 +61,7 @@ public class Population implements Drawable {
      */
     public void doNaturalSelection(double mutationChance) {
         evaluateFitness();
-        reproduce(mutationChance);
+        dots = reproduce(mutationChance);
     }
 
     private void evaluateFitness() {
@@ -70,11 +70,12 @@ public class Population implements Drawable {
         }
     }
 
-    private void reproduce(double mutationChance) {
     /**
      * Produces the next generation of dots from the existing one
      * @param mutationChance chance of a dot's gene mutating
+     * @return
      */
+    private Dot[] reproduce(double mutationChance) {
         final int populationSize = dots.length;
         final Dot[] descendants = new Dot[populationSize];
         final Dot mostFit = Arrays.stream(dots).max(Comparator.comparingDouble(Dot::getFitness)).get();
