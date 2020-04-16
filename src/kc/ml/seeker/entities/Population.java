@@ -3,11 +3,13 @@ package kc.ml.seeker.entities;
 import java.awt.*;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Random;
 import java.util.function.Supplier;
 
 public class Population implements Drawable {
 
     private Dot[] dots;
+    private Random randomThreshold;
 
     /**
      * Spawns a population of dots.
@@ -16,6 +18,7 @@ public class Population implements Drawable {
      * @param posY starting y position
      */
     public Population(int size, double posX, double posY) {
+        randomThreshold = new Random();
         dots = new Dot[size];
         for (int i = 0; i < dots.length; i++) {
             dots[i] = new Dot(posX, posY);
@@ -76,12 +79,14 @@ public class Population implements Drawable {
      * @return
      */
     private Dot[] reproduce(double mutationChance) {
+        final double cumulativeFitness = Arrays.stream(dots).mapToDouble(Dot::getFitness).sum();
+        System.out.println(cumulativeFitness);
         final int populationSize = dots.length;
         final Dot[] descendants = new Dot[populationSize];
 
         includeFittest(descendants);
         for (int i = 0; i < populationSize-1; i++) {
-            final Dot parent = selectParent();
+            final Dot parent = selectParent(cumulativeFitness);
             final Dot child = parent.cloned(mutationChance);
             descendants[i] = child;
         }
@@ -103,10 +108,8 @@ public class Population implements Drawable {
         descendants[descendants.length-1] = fittestClone; // drawn last to overlay other dots
     }
 
-    // TODO optimize fitness proportionate selection
-    private Dot selectParent() {
-        final double cumulativeFitness = Arrays.stream(dots).mapToDouble(Dot::getFitness).sum();
-        final double threshold = Math.random() * cumulativeFitness;
+    private Dot selectParent(double cumulativeFitness) {
+        final double threshold = randomThreshold.nextDouble() * cumulativeFitness;
 
         double runningSum = 0;
         // FIXME biased towards beginning of array
