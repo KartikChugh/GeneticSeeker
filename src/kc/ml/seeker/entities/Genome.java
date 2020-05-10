@@ -53,8 +53,7 @@ class Genome {
      * @param mutationChance chance of randomizing a gene
      */
     private void mutateDirections(double mutationChance) {
-        directions[0] = randomMutator.nextDouble() * 360.0;
-        for (int i = 1; i < directions.length; i++) {
+        for (int i = 0; i < directions.length; i++) {
             if (randomMutator.nextDouble() < mutationChance) {
                 directions[i] = randomMutator.nextDouble() * 360.0;
             }
