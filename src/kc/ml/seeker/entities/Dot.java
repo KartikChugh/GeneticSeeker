@@ -6,6 +6,7 @@ import static kc.ml.seeker.main.SeekerPanel.*;
 
 public class Dot extends Entity {
 
+    // Functioning Hyperparameters
     private static final int NUM_GENES = 400;
     private static final double MAX_VELOCITY = 7.0;
 
@@ -22,9 +23,9 @@ public class Dot extends Entity {
     private final Genome genome;
 
     /**
-     * 
-     * @param posX
-     * @param posY
+     * Spawns a dot.
+     * @param posX starting x position
+     * @param posY starting y position
      * @param genome
      */
     private Dot(double posX, double posY, Genome genome) {
@@ -35,14 +36,27 @@ public class Dot extends Entity {
         initialize();
     }
 
+    /**
+     * Spawns a dot with a randomized genome.
+     * @param posX
+     * @param posY
+     */
     Dot(double posX, double posY) {
         this(posX, posY, new Genome(NUM_GENES));
     }
 
+    /**
+     * Clones this dot with a mutated genome
+     * @param mutationChance chance of gene mutation
+     * @return cloned dot
+     */
     Dot cloned(double mutationChance) {
         return new Dot(this.posX_start, this.posY_start, genome.cloned(mutationChance));
     }
 
+    /**
+     * Sets default field values upon construction
+     */
     private void initialize() {
         setPosX(posX_start);
         setPosY(posY_start);
@@ -54,14 +68,15 @@ public class Dot extends Entity {
         fitness = 0;
     }
 
+    /**
+     * Checks if dot can no longer move, otherwise moves it
+     */
     public void update() {
-
         if (!genome.hasNextAcc() || isTouchingWall() || isTouchingGoal()) {
             moving = false;
-            return;
+        } else {
+            move();
         }
-
-        move();
     }
 
     private boolean isTouchingGoal() {
@@ -73,6 +88,9 @@ public class Dot extends Entity {
         return (getPosX() < 0 || getPosX() > WIDTH-DIAMETER) || (getPosY() < 0 || getPosY() > HEIGHT-DIAMETER);
     }
 
+    /**
+     * Retrieves acceleration to update velocity and position
+     */
     private void move() {
         final double[] acc = genome.nextAcc();
         accX = acc[0];
@@ -80,7 +98,6 @@ public class Dot extends Entity {
 
         velX += accX;
         velY += accY;
-
         velX = clamp(velX);
         velY = clamp(velY);
 
@@ -88,6 +105,9 @@ public class Dot extends Entity {
         changePosY(velY);
     }
 
+    /**
+     * Evalutes fitness based on distance
+     */
     public void evaluateFitness() {
         final double dist = squareDistanceFrom(goal);
         final double cost = dist;

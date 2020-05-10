@@ -22,7 +22,7 @@ public class Seeker {
     }
 
     /**
-     * Computes dimensions of the panel.
+     * Computes dimensions for the panel.
      * @return length of one side of the square
      */
     public static int computeSize() {

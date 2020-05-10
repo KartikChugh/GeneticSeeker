@@ -102,13 +102,16 @@ public class Population implements Drawable {
         final Supplier<RuntimeException> emptyPopulation = () -> new IllegalStateException("Population cannot be empty");
 
         final Dot fittest = Arrays.stream(dots).max(Comparator.comparingDouble(Dot::getFitness)).orElseThrow(emptyPopulation);
+        //System.out.println(fittest.getFitness());
         final Dot fittestClone = fittest.cloned(0); // (perfect) clone to use a new dot instance
         fittestClone.setMostFit(true);
         descendants[descendants.length-1] = fittestClone; // drawn last to overlay other dots
     }
 
     /**
-     * Selects a dot via fitness-proportionate selection.
+     * Selects a dot based on its fitness
+     *
+     * Implementation: FPS (fitness-proportionate selection)
      * @param cumulativeFitness sum of all fitnesses
      * @return selected dot
      */
@@ -124,6 +127,6 @@ public class Population implements Drawable {
             }
         }
 
-        return null;
+        throw new AssertionError("Cumulative fitness fails to meet threshold");
     }
 }
