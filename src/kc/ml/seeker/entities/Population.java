@@ -74,17 +74,16 @@ public class Population implements Drawable {
     }
 
     /**
-     * Produces the next generation of dots from the existing one
+     * Produces the next generation of dots from the existing one.
      * @param mutationChance chance of a dot's gene mutating
      * @return
      */
     private Dot[] reproduce(double mutationChance) {
         final double cumulativeFitness = Arrays.stream(dots).mapToDouble(Dot::getFitness).sum();
-        System.out.println(cumulativeFitness);
         final int populationSize = dots.length;
         final Dot[] descendants = new Dot[populationSize];
 
-        includeFittest(descendants);
+        includeFittest(descendants); // prev gen's "champion"
         for (int i = 0; i < populationSize-1; i++) {
             final Dot parent = selectParent(cumulativeFitness);
             final Dot child = parent.cloned(mutationChance);
@@ -108,6 +107,11 @@ public class Population implements Drawable {
         descendants[descendants.length-1] = fittestClone; // drawn last to overlay other dots
     }
 
+    /**
+     * Selects a dot via fitness-proportionate selection.
+     * @param cumulativeFitness sum of all fitnesses
+     * @return selected dot
+     */
     private Dot selectParent(double cumulativeFitness) {
         final double threshold = randomThreshold.nextDouble() * cumulativeFitness;
 

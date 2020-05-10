@@ -21,6 +21,12 @@ public class Dot extends Entity {
     private boolean mostFit;
     private final Genome genome;
 
+    /**
+     * 
+     * @param posX
+     * @param posY
+     * @param genome
+     */
     private Dot(double posX, double posY, Genome genome) {
         super(posX, posY);
         posX_start = posX;
