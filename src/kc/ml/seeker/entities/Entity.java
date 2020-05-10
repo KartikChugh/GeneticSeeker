@@ -56,7 +56,7 @@ public abstract class Entity implements Drawable {
     }
 
     final boolean isTouching(Entity o) {
-        return squareDistanceFrom(o) <= Math.pow(DIAMETER, 2);
+        return squareDistanceFrom(o) <= (DIAMETER*DIAMETER);
     }
 
     @Override
