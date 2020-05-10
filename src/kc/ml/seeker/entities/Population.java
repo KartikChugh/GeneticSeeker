@@ -9,7 +9,7 @@ import java.util.function.Supplier;
 public class Population implements Drawable {
 
     private Dot[] dots;
-    private Random randomThreshold;
+    private final Random randomThreshold;
 
     /**
      * Spawns a population of dots.

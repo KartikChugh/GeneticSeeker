@@ -4,7 +4,7 @@ import java.awt.*;
 
 public abstract class Entity implements Drawable {
 
-    protected static int DIAMETER = 10;
+    protected static final int DIAMETER = 10;
     private double posX;
     private double posY;
 

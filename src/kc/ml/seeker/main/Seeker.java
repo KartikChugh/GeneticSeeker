@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 
 public class Seeker {
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) {
         SwingUtilities.invokeLater(Seeker::init);
     }
 

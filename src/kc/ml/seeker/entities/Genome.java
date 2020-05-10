@@ -1,6 +1,5 @@
 package kc.ml.seeker.entities;
 
-import java.util.Arrays;
 import java.util.Random;
 
 class Genome {
@@ -23,8 +22,8 @@ class Genome {
     // TODO directions constructor?
     /**
      * Copy constructor with mutation chance
-     * @param genome
-     * @param mutationChance
+     * @param genome genome to copy
+     * @param mutationChance chance of mutating a gene
      */
     private Genome(Genome genome, double mutationChance) {
         randomMutator = genome.randomMutator;
@@ -34,7 +33,7 @@ class Genome {
 
     /**
      * Clones this genome with mutated genes
-     * @param mutationChance
+     * @param mutationChance chance of mutating a gene
      * @return mutated genome
      */
     Genome cloned(double mutationChance) {
@@ -65,7 +64,7 @@ class Genome {
      * @return true if available, false otherwise
      */
     boolean hasNextAcc() {
-        return (geneIndex + 1) < directions.length;
+        return geneIndex < directions.length;
     }
 
     /**

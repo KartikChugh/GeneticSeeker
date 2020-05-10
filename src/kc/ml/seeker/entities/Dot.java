@@ -26,7 +26,7 @@ public class Dot extends Entity {
      * Spawns a dot.
      * @param posX starting x position
      * @param posY starting y position
-     * @param genome
+     * @param genome genetic instructions
      */
     private Dot(double posX, double posY, Genome genome) {
         super(posX, posY);
@@ -38,8 +38,8 @@ public class Dot extends Entity {
 
     /**
      * Spawns a dot with a randomized genome.
-     * @param posX
-     * @param posY
+     * @param posX starting x position
+     * @param posY starting y position
      */
     Dot(double posX, double posY) {
         this(posX, posY, new Genome(NUM_GENES));
@@ -106,7 +106,7 @@ public class Dot extends Entity {
     }
 
     /**
-     * Evalutes fitness based on distance
+     * Evaluates fitness based on distance
      */
     public void evaluateFitness() {
         final double dist = squareDistanceFrom(goal);
