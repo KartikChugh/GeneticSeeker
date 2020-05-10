@@ -122,7 +122,7 @@ public class Population implements Drawable {
         // FIXME biased towards beginning of array
         for (Dot dot : dots) {
             runningSum += dot.getFitness();
-            if (runningSum > threshold) {
+            if (runningSum >= threshold) {
                 return dot;
             }
         }
