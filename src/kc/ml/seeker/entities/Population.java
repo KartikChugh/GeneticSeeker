@@ -76,7 +76,7 @@ public class Population implements Drawable {
     /**
      * Produces the next generation of dots from the existing one.
      * @param mutationChance chance of a dot's gene mutating
-     * @return
+     * @return array containing next generation
      */
     private Dot[] reproduce(double mutationChance) {
         final double cumulativeFitness = Arrays.stream(dots).mapToDouble(Dot::getFitness).sum();
@@ -102,7 +102,6 @@ public class Population implements Drawable {
         final Supplier<RuntimeException> emptyPopulation = () -> new IllegalStateException("Population cannot be empty");
 
         final Dot fittest = Arrays.stream(dots).max(Comparator.comparingDouble(Dot::getFitness)).orElseThrow(emptyPopulation);
-        //System.out.println(fittest.getFitness());
         final Dot fittestClone = fittest.cloned(0); // (perfect) clone to use a new dot instance
         fittestClone.setMostFit(true);
         descendants[descendants.length-1] = fittestClone; // drawn last to overlay other dots
