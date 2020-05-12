@@ -4,7 +4,6 @@ import java.awt.*;
 
 public abstract class Entity implements Drawable {
 
-    protected static final int DIAMETER = 10;
     private double posX;
     private double posY;
 
@@ -14,6 +13,8 @@ public abstract class Entity implements Drawable {
     }
 
     protected abstract Color getColor();
+
+    protected abstract int getDiameter();
 
     final double getPosX() {
         return posX;
@@ -40,11 +41,11 @@ public abstract class Entity implements Drawable {
     }
 
     private double getCenterX() {
-        return posX + DIAMETER/2.0;
+        return posX + getDiameter()/2.0;
     }
 
     private double getCenterY() {
-        return posY + DIAMETER/2.0;
+        return posY + getDiameter()/2.0;
     }
 
     final double squareDistanceFrom(Entity o) {
@@ -56,13 +57,14 @@ public abstract class Entity implements Drawable {
     }
 
     final boolean isTouching(Entity o) {
-        return squareDistanceFrom(o) <= (DIAMETER*DIAMETER);
+        double minDist = (getDiameter() + o.getDiameter())/2.0;
+        return squareDistanceFrom(o) <= (minDist * minDist);
     }
 
     @Override
     public final void draw(Graphics2D g2d) {
         g2d.setColor(getColor());
-        g2d.fillOval((int) getPosX(), (int) getPosY(), DIAMETER, DIAMETER);
+        g2d.fillOval((int) getPosX(), (int) getPosY(), getDiameter(), getDiameter());
     }
 
 }

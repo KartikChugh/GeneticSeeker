@@ -12,4 +12,9 @@ public class Goal extends Entity {
     protected Color getColor() {
         return Color.RED;
     }
+
+    @Override
+    protected int getDiameter() {
+        return 15;
+    }
 }

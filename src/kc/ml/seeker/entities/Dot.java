@@ -85,7 +85,7 @@ public class Dot extends Entity {
     }
 
     private boolean isTouchingWall() {
-        return (getPosX() < 0 || getPosX() > WIDTH-DIAMETER) || (getPosY() < 0 || getPosY() > HEIGHT-DIAMETER);
+        return (getPosX() < 0 || getPosX() > WIDTH-getDiameter()) || (getPosY() < 0 || getPosY() > HEIGHT-getDiameter());
     }
 
     /**
@@ -126,6 +126,11 @@ public class Dot extends Entity {
     @Override
     protected Color getColor() {
         return mostFit ? Color.GREEN : Color.BLACK;
+    }
+
+    @Override
+    protected int getDiameter() {
+        return 4;
     }
 
     public double getFitness() {
