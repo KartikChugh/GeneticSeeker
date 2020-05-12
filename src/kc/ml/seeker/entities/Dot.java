@@ -109,10 +109,11 @@ public class Dot extends Entity {
      * Evaluates fitness based on distance
      */
     public void evaluateFitness() {
-        final double dist = squareDistanceFrom(goal);
-        final double cost = dist;
+        double minDist = (getDiameter() + goal.getDiameter())/2.0;
+        double minDistCost = minDist*minDist;
+        final double distCost = Math.max(squareDistanceFrom(goal), minDistCost);
 
-        fitness = 1/cost;
+        fitness = 1/distCost;
     }
 
     boolean isMoving() {
