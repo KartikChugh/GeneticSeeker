@@ -1,15 +1,18 @@
 package kc.ml.seeker.entities;
 
+import kc.ml.seeker.main.SeekerPanel;
+
 import java.awt.*;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Random;
 import java.util.function.Supplier;
 
+import static kc.ml.seeker.main.SeekerPanel.rng;
+
 public class Population implements Drawable {
 
     private Dot[] dots;
-    private final Random randomThreshold;
 
     /**
      * Spawns a population of dots.
@@ -18,7 +21,6 @@ public class Population implements Drawable {
      * @param posY starting y position
      */
     public Population(int size, double posX, double posY) {
-        randomThreshold = new Random();
         dots = new Dot[size];
         for (int i = 0; i < dots.length; i++) {
             dots[i] = new Dot(posX, posY);
@@ -80,6 +82,7 @@ public class Population implements Drawable {
      */
     private Dot[] reproduce(double mutationChance) {
         final double cumulativeFitness = Arrays.stream(dots).mapToDouble(Dot::getFitness).sum();
+        System.out.println(cumulativeFitness);
         final int populationSize = dots.length;
         final Dot[] descendants = new Dot[populationSize];
 
@@ -115,7 +118,7 @@ public class Population implements Drawable {
      * @return selected dot
      */
     private Dot selectParent(double cumulativeFitness) {
-        final double threshold = randomThreshold.nextDouble() * cumulativeFitness;
+        final double threshold = rng.nextDouble() * cumulativeFitness;
 
         double runningSum = 0;
         // FIXME biased towards beginning of array

@@ -6,24 +6,30 @@ import kc.ml.seeker.entities.Population;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.util.Random;
 
 public class SeekerPanel extends JPanel {
 
-    // Evolution Hyperparameters
+    // Evolution Parameters
     private static final double MUTATION_CHANCE = 0.005;
     private static final int POPULATION_SIZE = 1000;
+    private static final long SEED = -120;  
 
-    // Visual Settings
+    // Visual Parameters
     public static int WIDTH;
     public static int HEIGHT;
-    private static final int TPS_DESIRED = 100;
+    private static final int TPS_DESIRED = 1000;
 
+    public static Random rng;
     public static Goal goal;
     private final Population population;
     private int gen = 0;
 
     SeekerPanel(int size) {
         initGUI(size);
+
+        rng = new Random();
+        if (SEED != -1) rng.setSeed(SEED);
 
         population = new Population(POPULATION_SIZE, WIDTH/2.0, HEIGHT-100);
         goal = new Goal(WIDTH/2.0, 100);

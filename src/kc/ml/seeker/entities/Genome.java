@@ -2,11 +2,11 @@ package kc.ml.seeker.entities;
 
 import java.util.Random;
 
+import static kc.ml.seeker.main.SeekerPanel.rng;
+
 class Genome {
 
-    private static final Random SEEDER = new Random(13); // TODO remove
     private final double[] directions;
-    private final Random randomMutator;
     private int geneIndex;
 
     /**
@@ -14,7 +14,6 @@ class Genome {
      * @param size number of genes
      */
     Genome(int size) {
-        randomMutator = new Random(SEEDER.nextInt());
         directions = new double[size];
         randomizeDirections();
     }
@@ -26,7 +25,6 @@ class Genome {
      * @param mutationChance chance of mutating a gene
      */
     private Genome(Genome genome, double mutationChance) {
-        randomMutator = genome.randomMutator;
         directions = genome.directions.clone();
         mutateDirections(mutationChance);
     }
@@ -53,8 +51,9 @@ class Genome {
      */
     private void mutateDirections(double mutationChance) {
         for (int i = 0; i < directions.length; i++) {
-            if (randomMutator.nextDouble() < mutationChance) {
-                directions[i] = randomMutator.nextDouble() * 360.0;
+            final double mutationRoll = rng.nextDouble();
+            if (mutationRoll < mutationChance) {
+                directions[i] = rng.nextDouble() * 360.0;
             }
         }
     }
