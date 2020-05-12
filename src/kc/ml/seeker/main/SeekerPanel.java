@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 public class SeekerPanel extends JPanel {
 
     // Evolution Hyperparameters
-    private static final double MUTATION_CHANCE = 0.01;
+    private static final double MUTATION_CHANCE = 0.005;
     private static final int POPULATION_SIZE = 1000;
 
     // Visual Settings
