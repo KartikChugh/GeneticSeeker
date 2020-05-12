@@ -18,7 +18,9 @@ public class Dot extends Entity {
     private double accY;
 
     private double fitness;
+    private int steps;
     private boolean moving;
+    private boolean reachedGoal;
     private boolean mostFit;
     private final Genome genome;
 
@@ -64,7 +66,9 @@ public class Dot extends Entity {
         velY = 0;
         accX = 0;
         accY = 0;
+        steps = 0;
         moving = true;
+        reachedGoal = false;
         fitness = 0;
     }
 
@@ -72,15 +76,18 @@ public class Dot extends Entity {
      * Checks if dot can no longer move, otherwise moves it
      */
     public void update() {
-        if (!genome.hasNextAcc() || isTouchingWall() || isTouchingGoal()) {
+        boolean touchingGoal = isTouchingGoal();
+        if (touchingGoal) reachedGoal = true;
+
+        if (!genome.hasNextAcc() || isTouchingWall() || touchingGoal) {
             moving = false;
         } else {
             move();
+            steps++;
         }
     }
 
     private boolean isTouchingGoal() {
-        //reachedGoal = true;
         return isTouching(goal);
     }
 
@@ -111,9 +118,14 @@ public class Dot extends Entity {
     public void evaluateFitness() {
         double minDist = (getDiameter() + goal.getDiameter())/2.0;
         double minDistCost = minDist*minDist;
+
         final double distCost = Math.max(squareDistanceFrom(goal), minDistCost);
+        final double stepCost = steps*steps;
 
         fitness = 1/distCost;
+        if (reachedGoal) {
+            fitness += 10000/stepCost;
+        }
     }
 
     boolean isMoving() {
