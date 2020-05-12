@@ -19,11 +19,17 @@ public class SeekerPanel extends JPanel {
     public static int WIDTH;
     public static int HEIGHT;
     private static final int TPS_DESIRED = 100;
+    private static final int TPS_INTERVAL = 100;
 
-    public static Random rng;
     public static Goal goal;
     private final Population population;
     private int gen = 0;
+    public static Random rng;
+
+    private int ticks;
+    private long t;
+    private double deltaTime;
+    private int tps;
 
     SeekerPanel(int size) {
         initGUI(size);
@@ -46,6 +52,7 @@ public class SeekerPanel extends JPanel {
     }
 
     private void tick(ActionEvent e) {
+        if (ticks % TPS_INTERVAL == 0) updateTPS();
         if (population.isMoving()) {
             population.update();
             repaint();
@@ -53,6 +60,16 @@ public class SeekerPanel extends JPanel {
             population.doNaturalSelection(MUTATION_CHANCE);
             gen++;
         }
+        ticks++;
+    }
+
+    private void updateTPS() {
+        long t_ = System.currentTimeMillis();
+        deltaTime = (t_ - t);
+        t = t_;
+
+        double delta_seconds = deltaTime/1000.0;
+        tps = (int) (TPS_INTERVAL/delta_seconds);
     }
 
     @Override
@@ -64,5 +81,6 @@ public class SeekerPanel extends JPanel {
         goal.draw(g2d);
 
         g2d.drawString("Gen: " + gen, 15, 15);
+        g2d.drawString("FPS: " + tps, 15, 30);
     }
 }
