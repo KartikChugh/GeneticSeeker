@@ -7,7 +7,7 @@ import static kc.ml.seeker.main.SeekerPanel.*;
 public class Dot extends Entity {
 
     // Functioning Hyperparameters
-    private static final int NUM_GENES = 400;
+    private static final int NUM_GENES = 200;
     private static final double MAX_VELOCITY = 7.0;
 
     private final double posX_start;
