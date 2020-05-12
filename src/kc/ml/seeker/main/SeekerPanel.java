@@ -18,7 +18,7 @@ public class SeekerPanel extends JPanel {
     // Visual Parameters
     public static int WIDTH;
     public static int HEIGHT;
-    private static final int TPS_DESIRED = 1000;
+    private static final int TPS_DESIRED = 100;
 
     public static Random rng;
     public static Goal goal;
