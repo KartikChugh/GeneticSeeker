@@ -21,7 +21,7 @@ public class Dot extends Entity {
     private int steps;
     private boolean moving;
     private boolean reachedGoal;
-    private boolean mostFit;
+    private boolean elite;
     private final Genome genome;
     private final Color color;
 
@@ -142,7 +142,7 @@ public class Dot extends Entity {
 
     @Override
     protected Color getColor() {
-        return mostFit ? Color.BLACK : color;
+        return elite ? Color.BLACK : color;
     }
 
     @Override
@@ -152,14 +152,14 @@ public class Dot extends Entity {
 
     @Override
     protected int getRenderDiameter() {
-        return mostFit ? 8 : 4;
+        return elite ? 8 : 4;
     }
 
     public double getFitness() {
         return fitness;
     }
 
-    public void setMostFit(boolean mostFit) {
-        this.mostFit = mostFit;
+    public void setElite(boolean elite) {
+        this.elite = elite;
     }
 }
