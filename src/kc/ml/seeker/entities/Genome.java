@@ -1,5 +1,6 @@
 package kc.ml.seeker.entities;
 
+import java.awt.*;
 
 import static kc.ml.seeker.main.SeekerPanel.rng;
 
@@ -7,6 +8,7 @@ class Genome {
 
     private final double[] directions;
     private int geneIndex;
+    private Color color;
 
     /**
      * Forms genome with random genes.
@@ -55,6 +57,30 @@ class Genome {
                 directions[i] = rng.nextDouble() * 360.0;
             }
         }
+        updateColor();
+    }
+
+    /**
+     * Provides a color phenotype based on the genes
+     */
+    private void updateColor() {
+        double r = 120, g = 0, b = 120;
+        final int del = 10;
+        int rights = 0;
+        for (double dir : directions) {
+            if (dir > 270 || dir < 90) rights++;
+            else rights--;
+        }
+        r += rights*del;
+        b -= rights*del;
+        r = Math.max(0, Math.min(255, r));
+        g = Math.max(0, Math.min(255, g));
+        b = Math.max(0, Math.min(255, b));
+        color = new Color((int)r, (int)g, (int)b);
+    }
+
+    Color getColor() {
+        return color;
     }
 
     /**

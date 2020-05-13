@@ -23,6 +23,7 @@ public class Dot extends Entity {
     private boolean reachedGoal;
     private boolean mostFit;
     private final Genome genome;
+    private final Color color;
 
     /**
      * Spawns a dot.
@@ -35,6 +36,7 @@ public class Dot extends Entity {
         posX_start = posX;
         posY_start = posY;
         this.genome = genome;
+        color = genome.getColor();
         initialize();
     }
 
@@ -140,7 +142,7 @@ public class Dot extends Entity {
 
     @Override
     protected Color getColor() {
-        return mostFit ? Color.BLUE : Color.BLACK;
+        return mostFit ? Color.BLACK : color;
     }
 
     @Override
