@@ -16,6 +16,10 @@ public abstract class Entity implements Drawable {
 
     protected abstract int getDiameter();
 
+    protected int getRenderDiameter() {
+        return getDiameter();
+    }
+
     final double getPosX() {
         return posX;
     }
@@ -62,7 +66,7 @@ public abstract class Entity implements Drawable {
     @Override
     public final void draw(Graphics2D g2d) {
         g2d.setColor(getColor());
-        g2d.fillOval((int) getPosX(), (int) getPosY(), getDiameter(), getDiameter());
+        g2d.fillOval((int) getPosX(), (int) getPosY(), getRenderDiameter(), getRenderDiameter());
     }
 
 }

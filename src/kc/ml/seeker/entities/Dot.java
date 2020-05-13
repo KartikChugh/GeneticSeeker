@@ -140,12 +140,17 @@ public class Dot extends Entity {
 
     @Override
     protected Color getColor() {
-        return mostFit ? Color.GREEN : Color.BLACK;
+        return mostFit ? Color.BLUE : Color.BLACK;
     }
 
     @Override
     protected int getDiameter() {
         return 4;
+    }
+
+    @Override
+    protected int getRenderDiameter() {
+        return mostFit ? 8 : 4;
     }
 
     public double getFitness() {
