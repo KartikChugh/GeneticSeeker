@@ -91,9 +91,10 @@ public class SeekerPanel extends JPanel {
         super.paintComponent(g);
         final Graphics2D g2d = (Graphics2D) g;
 
-        population.draw(g2d);
         goal.draw(g2d);
+        population.draw(g2d);
 
+        g2d.setColor(Color.BLACK);
         g2d.drawString("Gen: " + gen, 15, 15);
         g2d.drawString("FPS: " + tps, 15, 30);
     }
