@@ -2,7 +2,6 @@ package kc.ml.seeker.main;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.FileNotFoundException;
 
 public class Seeker {
 

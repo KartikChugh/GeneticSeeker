@@ -1,11 +1,8 @@
 package kc.ml.seeker.entities;
 
-import kc.ml.seeker.main.SeekerPanel;
-
 import java.awt.*;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Random;
 import java.util.function.Supplier;
 
 import static kc.ml.seeker.main.SeekerPanel.rng;

@@ -1,6 +1,5 @@
 package kc.ml.seeker.entities;
 
-import java.util.Random;
 
 import static kc.ml.seeker.main.SeekerPanel.rng;
 
