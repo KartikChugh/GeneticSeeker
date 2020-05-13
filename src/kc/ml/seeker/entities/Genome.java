@@ -72,8 +72,8 @@ class Genome {
      */
     double[] nextAcc() {
         final double[] acc = new double[2];
-        acc[0] = Math.cos(directions[geneIndex]);
-        acc[1] = Math.sin(directions[geneIndex]);
+        acc[0] = Math.cos(Math.toRadians(directions[geneIndex]));
+        acc[1] = Math.sin(Math.toRadians(directions[geneIndex]));
         geneIndex++;
         return acc;
     }
