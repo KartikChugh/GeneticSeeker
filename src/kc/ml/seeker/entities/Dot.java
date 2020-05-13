@@ -105,11 +105,13 @@ public class Dot extends Entity {
 
         velX += accX;
         velY += accY;
+
         velX = clamp(velX);
         velY = clamp(velY);
 
-        changePosX(velX);
-        changePosY(velY);
+        changePosX(velX*DT*65);
+        changePosY(velY*DT*65);
+
     }
 
     /**

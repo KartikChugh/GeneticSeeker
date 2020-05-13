@@ -18,18 +18,22 @@ public class SeekerPanel extends JPanel {
     // Visual Parameters
     public static int WIDTH;
     public static int HEIGHT;
+    public static final double DT = 0.01;
     private static final int TPS_DESIRED = 100;
-    private static final int TPS_INTERVAL = 100;
+    private static final int TPS_INTERVAL = TPS_DESIRED;
 
+    // Timing
+    public static double deltaTime;
+    public static double dt_accumulator;
+    private int ticks;
+    private long t;
+    private double dt_interval;
+    private int tps;
+
+    public static Random rng;
     public static Goal goal;
     private final Population population;
     private int gen = 0;
-    public static Random rng;
-
-    private int ticks;
-    private long t;
-    private double deltaTime;
-    private int tps;
 
     SeekerPanel(int size) {
         initGUI(size);
@@ -40,6 +44,7 @@ public class SeekerPanel extends JPanel {
         population = new Population(POPULATION_SIZE, WIDTH/2.0, HEIGHT-100);
         goal = new Goal(WIDTH/2.0, 100);
 
+        t = System.currentTimeMillis();
         final Timer timer = new Timer(1000/TPS_DESIRED, this::tick);
         timer.start();
     }
@@ -52,9 +57,12 @@ public class SeekerPanel extends JPanel {
     }
 
     private void tick(ActionEvent e) {
-        if (ticks % TPS_INTERVAL == 0) updateTPS();
+        updateTime();
         if (population.isMoving()) {
-            population.update();
+            while (dt_accumulator >= DT) {
+                population.update();
+                dt_accumulator -= DT;
+            }
             repaint();
         } else {
             population.doNaturalSelection(MUTATION_CHANCE);
@@ -63,13 +71,19 @@ public class SeekerPanel extends JPanel {
         ticks++;
     }
 
-    private void updateTPS() {
+    private void updateTime() {
         long t_ = System.currentTimeMillis();
-        deltaTime = (t_ - t);
+        deltaTime = (t_ - t)/1000.0;
         t = t_;
+        dt_accumulator += deltaTime;
 
-        double delta_seconds = deltaTime/1000.0;
-        tps = (int) (TPS_INTERVAL/delta_seconds);
+        // Re-calculate tps every TPS_INTERVAL milliseconds
+        if (ticks % TPS_INTERVAL == 0) {
+            tps = (int) (TPS_INTERVAL/dt_interval);
+            dt_interval = 0;
+        } else {
+            dt_interval += deltaTime;
+        }
     }
 
     @Override

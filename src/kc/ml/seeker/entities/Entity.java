@@ -49,10 +49,8 @@ public abstract class Entity implements Drawable {
     }
 
     final double squareDistanceFrom(Entity o) {
-
         final double dx = getCenterX() - o.getCenterX();
         final double dy = getCenterY() - o.getCenterY();
-        
         return dx*dx + dy*dy;
     }
 
