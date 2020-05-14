@@ -13,7 +13,7 @@ public class SeekerPanel extends JPanel {
     // Evolution Parameters
     private static final double MUTATION_CHANCE = 0.005;
     private static final int POPULATION_SIZE = 1000;
-    private static final long SEED = -1;
+    private static final long SEED = -13;
 
     // Visual Parameters
     public static int WIDTH;
