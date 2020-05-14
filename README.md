@@ -6,8 +6,7 @@ Genetic Seeker is an evolutionary simulation in which agents compete to locate a
 
 ## Evolutionary Design
 
-- **Selection: FPS.** Fitness-proportionate selection
-- **Recombination: Cloning with mutation.**
-- **Fitness: Inverse distance + step penalty.**
-- **Genome: Acceleration vectors**
-- **Elitism**
+- **Fitness-proportionate selection.** FPS offers a balance between evolutionary pressure and genetic diversity by selecting population members with a chance proportional to their fitness (e.g. a fitness of 4 would grant twice the odds of survival over a fitness of 2).
+- **Cloning with mutation.**
+- **Fitness values results and efficiency.**
+- **Genetic representation**
