@@ -36,8 +36,8 @@ These instructions are for working with the code.
 1. First, you'll need to clone this repo to your local machine, using `git clone https://github.com/KartikChugh/genetic-seeker.git` or [downloading it as a zip](https://github.com/KartikChugh/genetic-seeker/archive/master.zip).
 
 2. Open the project in the editor of your choice (IntelliJ recommended) and make tweaks as desired. Most hyperparameters have been factored out to `SeekerPanel.java`, while a few remain in `Dot.java`. Collectively, these include:
-	* Mutation chance (default: 0.5%)
-	* Genome size (200)
-	* Population size (1000)
-	* Max speed (7.0)
-	* Seed for mutations/selection (-1 for random seed)
+	* **Mutation chance** (default: 0.5%)
+	* **Population size** (1000)
+	* **Seed for mutations/selection** (-1 for random seed)
+	* **Genome length** (200)
+	* **Max speed** (7.0)
