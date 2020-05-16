@@ -4,6 +4,10 @@
 
 Genetic Seeker is an evolutionary simulation in which agents compete to locate a moving target with no information other than genetic instructions. The application is built in Swing and serves as a pure Java re-implementation of the [CodeBullet project](https://medium.com/@mik.szuga/the-genetic-algorithm-explained-with-intelligent-dots-319088f22d68) done in Processing.
 
+<p align="center">
+<img src="/example-small.gif">
+</p>
+
 ### Genetic Algorithms
 
 GAs are a machine learning approach that employ random search and natural selection to discover heuristic solutions to optimization problems, as opposed to gradient-guided techniques. They are rooted in the idea that machine learning models can "evolve" to become better over time with some inspiration from biology. At the heart of the algorithm is the concept of _genes_, which underly the behavior of individuals and can spread among the broader population.
