@@ -10,7 +10,7 @@ public class Goal extends Entity {
 
     @Override
     protected Color getColor() {
-        return Color.GREEN;
+        return Color.BLACK;
     }
 
     @Override

@@ -142,7 +142,7 @@ public class Dot extends Entity {
 
     @Override
     protected Color getColor() {
-        return elite ? Color.BLACK : color;
+        return elite ? Color.GREEN : color;
     }
 
     @Override
