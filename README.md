@@ -14,7 +14,7 @@ Genetic Seeker is an evolutionary simulation in which agents compete to locate a
 
 ### Genetic Algorithms
 
-GAs are a machine learning approach that employ random search and natural selection to discover heuristic solutions to optimization problems, as opposed to gradient-guided techniques. They are rooted in the idea that machine learning models can "evolve" to become better over time with some inspiration from biology. At the heart of the algorithm are _genes_, which underly the behavior of individuals and can spread among the broader population.
+GAs are a machine learning approach that employ random search and natural selection to discover heuristic solutions to optimization problems, as opposed to gradient-guided techniques. They are rooted in the idea that machine learning models can "evolve" to become better over time, with some inspiration from biology. At the heart of the algorithm are genes, which shape the behavior of individuals and spread among the broader population.
 
 ### Evolutionary Design
 A brief summary of the genetic operators and design decisions in Seeker:
@@ -36,8 +36,8 @@ These instructions are for working with the code.
 1. First, you'll need to clone this repo to your local machine, using `git clone https://github.com/KartikChugh/genetic-seeker.git` or [downloading it as a zip](https://github.com/KartikChugh/genetic-seeker/archive/master.zip).
 
 2. Open the project in the editor of your choice (IntelliJ recommended) and make tweaks as desired. Most hyperparameters have been factored out to `SeekerPanel.java`, while a few remain in `Dot.java`. Collectively, these include:
-	* **Mutation chance** (default: 0.5%)
-	* **Population size** (1000)
-	* **Seed for mutations/selection** (-1 for random seed)
-	* **Genome length** (200)
-	* **Max speed** (7.0)
+	* **Mutation chance** - a gene's odds of being randomized (_default_: 0.5%)
+	* **Population size** - how many agents to spawn (1000)
+	* **Seed** - seeds the random mutation/selection processes (-1 _for random seed_)
+	* **Genome length** - number of instructions for an agent (200)
+	* **Max speed** - terminal velocity for an agent (7.0)
