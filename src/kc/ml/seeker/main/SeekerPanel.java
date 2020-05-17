@@ -96,6 +96,6 @@ public class SeekerPanel extends JPanel {
 
         g2d.setColor(Color.BLACK);
         g2d.drawString("Gen: " + gen, 15, 15);
-        g2d.drawString("FPS: " + tps, WIDTH-60, 15);
+        g2d.drawString("Frames: " + tps, WIDTH-60, 15);
     }
 }
