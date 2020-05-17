@@ -6,7 +6,7 @@ Genetic Seeker is an evolutionary simulation in which agents compete to locate a
 
 <a href="https://github.com/KartikChugh/genetic-seeker/releases/latest/download/Seeker.jar">
 <p align="center">
-  <img src="/example-small.gif"> 
+  <img src="/example.gif"> 
   <br>
   <img src="https://img.shields.io/github/v/release/KartikChugh/genetic-seeker.svg?logo=java&label=try%20it%20out&style=for-the-badge&color=red">
 </p>
