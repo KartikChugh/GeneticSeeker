@@ -1,15 +1,16 @@
 ![logo](/logo.png)
+<p align="center">
+  	<img src="https://img.shields.io/github/v/release/KartikChugh/genetic-seeker.svg?logo=java&label=run%20simulation&style=for-the-badge&color=red">
+</p>
 
 ## Overview
 
 Genetic Seeker is an evolutionary simulation in which agents compete to locate a moving target with no information other than genetic instructions. The application is built in Swing and serves as a pure Java re-implementation of the [CodeBullet project](https://medium.com/@mik.szuga/the-genetic-algorithm-explained-with-intelligent-dots-319088f22d68) done in Processing.
 
 <a href="https://github.com/KartikChugh/genetic-seeker/releases/latest/download/Seeker.jar">
-<p align="center">
-  <img src="/example.gif"> 
-  <br>
-  <img src="https://img.shields.io/github/v/release/KartikChugh/genetic-seeker.svg?logo=java&label=try%20it%20out&style=for-the-badge&color=red">
-</p>
+	<p align="center">
+	  	<img src="/example.gif"> 
+	</p>
 </a>
 
 ### Genetic Algorithms
@@ -22,6 +23,7 @@ A brief summary of the genetic operators and design decisions in Seeker:
 - **Fitness scores results and efficiency.** The fitness function scores agents first according to their distance from the target and second according to the steps they took to get there, to ensure convergence to a straight path. 
 - **Fitness-proportionate selection.** FPS offers a balance between evolutionary pressure and genetic diversity by selecting population members with a chance proportional to their fitness (e.g. a fitness score of 6.0 provides twice the odds of survival over a score of 3.0).
 - **Genetic representation.** An agent's genome consists of several hundred acceleration vectors, which are read sequentially to guide motion.
+- **Visual phenotype.** Agents are colored differently based on their genetic codes. This tends to reveal clusters and highlights the growth and decline of sub-groups over time.
 - **Cloning with mutation.** Single-parent cloning is the simplest mechanism for genetic recombination, but suffices for this problem. Parents are culled from each generation and cloned until repopulation, passing down their genes with small chances of point mutation (randomized new genes).
 - **Elitist selection.** The fittest agent of each generation is automatically survived to the next. Elitism prevents populations from wholly regressing by mutation. 
 
@@ -41,3 +43,6 @@ These instructions are for working with the code.
 	* **Seed** - seeds the random mutation/selection processes (-1 _for random seed_)
 	* **Genome length** - number of instructions for an agent (200)
 	* **Max speed** - terminal velocity for an agent (7.0)
+	
+### Additional
+As a final note, some interesting seeds discovered thus far are 222, which exhibits a competition of sorts among two sub-groups, and 333, which demonstrates quick convergence.
