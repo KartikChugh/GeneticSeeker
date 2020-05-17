@@ -79,6 +79,7 @@ public class Population implements Drawable {
      */
     private Dot[] reproduce(double mutationChance) {
         final double cumulativeFitness = Arrays.stream(dots).mapToDouble(Dot::getFitness).sum();
+        //System.out.println(cumulativeFitness);
         final int populationSize = dots.length;
         final Dot[] descendants = new Dot[populationSize];
 

@@ -14,7 +14,7 @@ public class SeekerPanel extends JPanel {
     private static final double MUTATION_CHANCE = 0.005;
     private static final int POPULATION_SIZE = 1000;
     private static final long SEED = -1;
-    
+    private static final int RELOCATE_INTERVAL = 15;
     private static int GENOME_LENGTH;
 
     // Visual Parameters
@@ -70,6 +70,9 @@ public class SeekerPanel extends JPanel {
         } else {
             population.doNaturalSelection(MUTATION_CHANCE);
             gen++;
+            if (gen % RELOCATE_INTERVAL == 0 && gen > 0) {
+                goal.relocate(WIDTH * 0.9);
+            }
         }
         ticks++;
     }
