@@ -29,7 +29,7 @@ A brief summary of the genetic operators and design decisions in Seeker:
 - **Visual phenotype.** Agents are colored differently based on their genetic codes. This tends to reveal clusters and highlights the growth and decline of sub-groups over time.
 - **Cloning with mutation.** Single-parent cloning is the simplest mechanism for genetic recombination, but suffices for this problem. Parents are culled from each generation and cloned until repopulation, passing down their genes with small chances of point mutation (randomized new genes).
 - **Elitist selection.** The fittest agent of each generation is automatically survived to the next. Elitism prevents populations from wholly regressing by mutation. 
-- **Dynamic problem.** Every now and then, the target moves to a new location, putting selective pressure on the population learn a new path.
+- **Dynamic problem.** The target moves to a new location periodically, putting selective pressure on the population to adapt.
 
 ## Experimentation
 
