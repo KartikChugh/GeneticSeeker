@@ -44,8 +44,5 @@ These instructions are for working with the code.
 	* **Mutation chance** - a gene's odds of being randomized (_default_: 0.5%)
 	* **Population size** - how many agents to spawn (1000)
 	* **Seed** - seeds the random mutation/selection processes (-1 _for random seed_)
-	* **Genome length** - number of instructions for an agent (200)
+	* **Genome length** - number of instructions for an agent (scales to resolution height)
 	* **Max speed** - terminal velocity for an agent (7.0)
-	
-### Additional
-As a final note, some interesting seeds discovered thus far are 222, which exhibits a competition of sorts among two sub-groups, and 333, which demonstrates quick convergence.

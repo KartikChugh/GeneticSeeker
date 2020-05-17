@@ -6,8 +6,6 @@ import static kc.ml.seeker.main.SeekerPanel.*;
 
 public class Dot extends Entity {
 
-    // Agent Parameters
-    private static final int NUM_GENES = 200;
     private static final double MAX_VELOCITY = 7.0;
 
     private final double posX_start;
@@ -45,8 +43,8 @@ public class Dot extends Entity {
      * @param posX starting x position
      * @param posY starting y position
      */
-    Dot(double posX, double posY) {
-        this(posX, posY, new Genome(NUM_GENES));
+    Dot(int genes, double posX, double posY) {
+        this(posX, posY, new Genome(genes));
     }
 
     /**

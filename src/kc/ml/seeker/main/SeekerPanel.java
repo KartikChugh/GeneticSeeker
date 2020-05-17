@@ -13,7 +13,9 @@ public class SeekerPanel extends JPanel {
     // Evolution Parameters
     private static final double MUTATION_CHANCE = 0.005;
     private static final int POPULATION_SIZE = 1000;
-    private static final long SEED = -1; // 222 - competition, 333 - convergence
+    private static final long SEED = -1;
+    
+    private static int GENOME_LENGTH;
 
     // Visual Parameters
     public static int WIDTH;
@@ -37,11 +39,12 @@ public class SeekerPanel extends JPanel {
 
     SeekerPanel(int size) {
         initGUI(size);
+        GENOME_LENGTH = (int)(0.3 * HEIGHT);
 
         rng = new Random();
         if (SEED != -1) rng.setSeed(SEED);
 
-        population = new Population(POPULATION_SIZE, WIDTH/2.0, HEIGHT-100);
+        population = new Population(POPULATION_SIZE, GENOME_LENGTH, WIDTH/2.0, HEIGHT-100);
         goal = new Goal(WIDTH/2.0, 100);
 
         t = System.currentTimeMillis();
@@ -96,6 +99,6 @@ public class SeekerPanel extends JPanel {
 
         g2d.setColor(Color.BLACK);
         g2d.drawString("Gen: " + gen, 15, 15);
-        g2d.drawString("Frames: " + tps, WIDTH-60, 15);
+        g2d.drawString("Frames: " + tps, WIDTH-80, 15);
     }
 }

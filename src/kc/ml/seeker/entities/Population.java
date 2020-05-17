@@ -17,10 +17,10 @@ public class Population implements Drawable {
      * @param posX starting x position
      * @param posY starting y position
      */
-    public Population(int size, double posX, double posY) {
+    public Population(int size, int genes, double posX, double posY) {
         dots = new Dot[size];
         for (int i = 0; i < dots.length; i++) {
-            dots[i] = new Dot(posX, posY);
+            dots[i] = new Dot(genes, posX, posY);
         }
     }
 
