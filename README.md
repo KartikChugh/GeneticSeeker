@@ -1,7 +1,10 @@
 ![logo](/logo.png)
+
+<a href="https://github.com/KartikChugh/genetic-seeker/releases/latest/download/Seeker.jar">
 <p align="center">
   	<img src="https://img.shields.io/github/v/release/KartikChugh/genetic-seeker.svg?logo=java&label=run%20simulation&style=for-the-badge&color=red">
 </p>
+</a>
 
 ## Overview
 
@@ -10,7 +13,7 @@ Genetic Seeker is an evolutionary simulation in which agents compete to locate a
 <a href="https://github.com/KartikChugh/genetic-seeker/releases/latest/download/Seeker.jar">
 	<p align="center">
 	  	<img src="/example.gif"> 
-	</p>
+</p>
 </a>
 
 ### Genetic Algorithms
