@@ -2,7 +2,7 @@
 
 <a href="https://github.com/KartikChugh/genetic-seeker/releases/latest/download/Seeker.jar">
 <p align="center">
-  	<img src="https://img.shields.io/github/v/release/KartikChugh/genetic-seeker.svg?logo=java&label=run%it!&style=for-the-badge&color=red">
+  	<img src="https://img.shields.io/github/v/release/KartikChugh/genetic-seeker.svg?logo=java&label=run%20it!&style=for-the-badge&color=red">
 </p>
 </a>
 
